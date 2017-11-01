@@ -1,19 +1,32 @@
 package com.example.android.requiryv2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> userAdapter;
     private ListView listView;
+    private ArrayList<RequiryUser> userData;
+    private FirebaseDatabase mFirebaseDatabse;
+    private DatabaseReference mRequiryUserDatabaseReference;
+    private Button mSubmitButton;
+    private Button mProfeedButton;
+    private DatabaseReference mProjectRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +44,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         listView = (ListView) findViewById(R.id.list_view);
-       // userAdapter = new ArrayAdapter<String>(this,android.R.);
+       // userAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,userData);
+        mFirebaseDatabse = FirebaseDatabase.getInstance();
+        mRequiryUserDatabaseReference = mFirebaseDatabse.getReference().child("requiry_user");
+        mProjectRef = mFirebaseDatabse.getReference().child("project");
+        mSubmitButton = (Button) findViewById(R.id.submit_button);
+        mSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //RequiryUser requiryUser = new RequiryUser(1, "Aayush Bhala", "9972244005", "aayushbest@gmail.com", "aayushbhala", 1, "Student at MIT Manipal");
+                Project project = new Project(3,3,
+                        "Gravitational Force","Physics",
+                        "2017-03-08",
+                        "2017-05-09",
+                        "Gravity, or gravitation, is a natural phenomenon b...",
+                        "https://en.wikipedia.org/wiki/Gravity");
+                mProjectRef.push().setValue(project);
+            }
+        });
+        mProfeedButton = (Button) findViewById(R.id.profeedButton);
+        mProfeedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ProFeedActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
     }
 
     @Override

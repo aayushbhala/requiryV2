@@ -12,6 +12,10 @@ public class RequiryUser {
     private int uWho;
     private String uDesc;
 
+    public RequiryUser(){
+
+    }
+
     public RequiryUser(int id, String name, String number, String email, String username, int who, String desc) {
         uID = id;
         uName = name;
@@ -26,7 +30,7 @@ public class RequiryUser {
         return uID;
     }
 
-    public String getName() {
+    public String getuName() {
         return uName;
     }
 

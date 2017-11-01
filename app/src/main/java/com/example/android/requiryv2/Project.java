@@ -12,6 +12,9 @@ public class Project {
     private String pDateEnds;
     private String pDesc;
     private String pLink;
+    public Project(){
+
+    }
     public Project(int pID,int uID,String pName,String pDomain,String pDateStarts,String pDateEnds,String pDesc,String pLink){
         this.pID = pID;
         this.uID = uID;
