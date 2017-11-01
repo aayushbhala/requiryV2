@@ -50,7 +50,7 @@ public class ProFeedAdapter extends ArrayAdapter<Project> {
               //  Log.e("ProFeedAdapter","1234"+requiryUser.getuName());
                // mCreatedByTextView.setText(""+requiryUser.getuID());
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    String userName = String.valueOf(snapshot.child("name").getValue());
+                    String userName = String.valueOf(snapshot.child("uName").getValue());
                     Log.e("ProFeedAdapter","1234"+userName);
                     mCreatedByTextView.setText(userName);
                 }

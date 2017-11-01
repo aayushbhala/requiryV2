@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProFeedActivity"></activity>
+        <activity android:name=".ProjectActivity" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>
