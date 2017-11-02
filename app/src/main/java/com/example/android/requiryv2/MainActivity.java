@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         mProfeedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,ProFeedActivity.class);
+                Intent intent = new Intent(MainActivity.this,SplashScreen.class);
                 startActivity(intent);
             }
         });
