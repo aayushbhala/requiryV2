@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -20,13 +19,13 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> userAdapter;
-    private ListView listView;
     private ArrayList<RequiryUser> userData;
     private FirebaseDatabase mFirebaseDatabse;
     private DatabaseReference mRequiryUserDatabaseReference;
     private Button mSubmitButton;
     private Button mProfeedButton;
     private DatabaseReference mProjectRef;
+    private Button submitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        listView = (ListView) findViewById(R.id.list_view);
-       // userAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,userData);
         mFirebaseDatabse = FirebaseDatabase.getInstance();
         mRequiryUserDatabaseReference = mFirebaseDatabse.getReference().child("requiry_user");
         mProjectRef = mFirebaseDatabse.getReference().child("project");
@@ -53,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //RequiryUser requiryUser = new RequiryUser(1, "Aayush Bhala", "9972244005", "aayushbest@gmail.com", "aayushbhala", 1, "Student at MIT Manipal");
-                Project project = new Project(3,3,
+                Project project = new Project("3","3"   ,
                         "Gravitational Force","Physics",
                         "2017-03-08",
                         "2017-05-09",
@@ -67,6 +64,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,ProFeedActivity.class);
+                startActivity(intent);
+            }
+        });
+        submitButton = (Button) findViewById(R.id.signup);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,SignUpActivity.class);
                 startActivity(intent);
             }
         });

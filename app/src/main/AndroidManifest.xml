@@ -18,11 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".ProFeedActivity" />
         <activity android:name=".ProjectActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".DiscussionsActivity" />
-        <activity android:name=".ContributorsActivity"/>
+        <activity android:name=".ContributorsActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".CreateProject"></activity>
     </application>
 
 </manifest>

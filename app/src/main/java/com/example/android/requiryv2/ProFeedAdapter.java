@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by MAHE on 01-Nov-17.
@@ -28,6 +29,7 @@ public class ProFeedAdapter extends ArrayAdapter<Project> {
     private TextView mDomainTextView;
     private FirebaseDatabase mRequiryUserDatabse;
     private DatabaseReference mReqiryDatabaseReference;
+    public static HashMap<String,Project> hashMap = new HashMap<>();
     public ProFeedAdapter(Context context, ArrayList<Project> arrayList) {
         super(context,0,arrayList);
     }
@@ -39,6 +41,7 @@ public class ProFeedAdapter extends ArrayAdapter<Project> {
             profeedListItemView = LayoutInflater.from(getContext()).inflate(R.layout.profeed_recycle_item,parent,false);
         }
         Project projectData = getItem(position);
+        hashMap.put(projectData.getpID(),projectData);
         mRequiryUserDatabse = FirebaseDatabase.getInstance();
         mReqiryDatabaseReference = mRequiryUserDatabse.getReference().child("requiry_user");
         mReqiryDatabaseReference.orderByChild("uID").equalTo(projectData.getuID());
@@ -46,13 +49,9 @@ public class ProFeedAdapter extends ArrayAdapter<Project> {
         mReqiryDatabaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                RequiryUser requiryUser = dataSnapshot.getValue(RequiryUser.class);
-              //  Log.e("ProFeedAdapter","1234"+requiryUser.getuName());
-               // mCreatedByTextView.setText(""+requiryUser.getuID());
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    String userName = String.valueOf(snapshot.child("uName").getValue());
-                    Log.e("ProFeedAdapter","1234"+userName);
-                    mCreatedByTextView.setText(userName);
+                    RequiryUser ru = dataSnapshot.getValue(RequiryUser.class);
+                    mCreatedByTextView.setText(ru.getuName());
                 }
             }
 
@@ -76,19 +75,6 @@ public class ProFeedAdapter extends ArrayAdapter<Project> {
 
             }
         });
-       /* mReqiryDatabaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                RequiryUser requiryUser = dataSnapshot.getValue(RequiryUser.class);
-                Log.e("ProFeedAdapter","1234"+requiryUser.getName());
-                mCreatedByTextView.setText(""+requiryUser.getuID());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
         mProjectNameTextView = (TextView) profeedListItemView.findViewById(R.id.project_name);
         mCircularTextView = (TextView) profeedListItemView.findViewById(R.id.text_circle);
         mCreatedByTextView = (TextView) profeedListItemView.findViewById(R.id.created_by);

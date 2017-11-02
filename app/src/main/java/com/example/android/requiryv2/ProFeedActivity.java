@@ -1,7 +1,10 @@
 package com.example.android.requiryv2;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ListView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -18,12 +21,23 @@ public class ProFeedActivity extends AppCompatActivity {
     private FirebaseDatabase mProjectDatabase;
     private DatabaseReference mProjectDatabaseRefernce;
     private ListView listView;
+    private ArrayList<Project> projectData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pro_feed);
-        ArrayList<Project> projectData = new ArrayList<>();
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_action_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProFeedActivity.this,CreateProject.class);
+                startActivity(intent);
+
+            }
+        });
+        projectData = new ArrayList<>();
         mProFeedAdapter = new ProFeedAdapter(this,projectData);
         listView = (ListView) findViewById(R.id.profeed_list_view);
         listView.setAdapter(mProFeedAdapter);
@@ -32,8 +46,8 @@ public class ProFeedActivity extends AppCompatActivity {
         mProFeedEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Project projectData = dataSnapshot.getValue(Project.class);
-                mProFeedAdapter.add(projectData);
+                Project project = dataSnapshot.getValue(Project.class);
+                mProFeedAdapter.add(project);
                 mProFeedAdapter.notifyDataSetChanged();
             }
 
@@ -44,6 +58,8 @@ public class ProFeedActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+                Project project = dataSnapshot.getValue(Project.class);
+                mProFeedAdapter.remove(ProFeedAdapter.hashMap.get(project.getpID()));
                 mProFeedAdapter.notifyDataSetChanged();
             }
 

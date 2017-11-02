@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">RequiryV2</string>
     <string name="action_settings">Settings</string>
+    <string name="user_name">Name</string>
+    <string name="user_number">Phone Number</string>
+    <string name="user_username">Username</string>
+    <string name="user_password">Password</string>
+    <string name="who">Who?</string>
+    <string name="student">Student</string>
+    <string name="faculty">Faculty</string>
+    <string name="desc">Enter something about yourself...!!!</string>
+    <string name="user_email">Email</string>
 </resources>
