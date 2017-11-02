@@ -143,6 +143,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="XXXXX"
+            android:textColor="#0008fc"
             android:padding="10dp"/>
     </LinearLayout>
 
@@ -151,6 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Contributors"
+        android:textColor="#0008fc"
         android:background="@android:color/transparent"
         android:layout_below="@id/p_link_layout"
         android:padding="10dp"/>
@@ -167,14 +169,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Apply"
-            android:layout_weight="1"/>
+            android:textColor="#e98000"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"/>
 
         <Button
             android:id="@+id/p_discussions_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Discussions"
-            android:layout_weight="1"/>
+            android:textColor="#e98000"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"/>
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,16 +1,12 @@
 package com.example.android.requiryv2;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -45,36 +41,7 @@ public class ProFeedAdapter extends ArrayAdapter<Project> {
         mRequiryUserDatabse = FirebaseDatabase.getInstance();
         mReqiryDatabaseReference = mRequiryUserDatabse.getReference().child("requiry_user");
         mReqiryDatabaseReference.orderByChild("uID").equalTo(projectData.getuID());
-        Log.e("ProFeedAdapter", "Hey There " + projectData.getuID());
-        mReqiryDatabaseReference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    RequiryUser ru = dataSnapshot.getValue(RequiryUser.class);
-                    mCreatedByTextView.setText(ru.getuName());
-                }
-            }
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
         mProjectNameTextView = (TextView) profeedListItemView.findViewById(R.id.project_name);
         mCircularTextView = (TextView) profeedListItemView.findViewById(R.id.text_circle);
         mCreatedByTextView = (TextView) profeedListItemView.findViewById(R.id.created_by);
@@ -85,20 +52,8 @@ public class ProFeedAdapter extends ArrayAdapter<Project> {
         mProjectNameTextView.setText(projectData.getpName());
         mCircularTextView.setText(""+projectData.getpName().charAt(0));
         mCreatedByTextView.setText(projectData.getuID()+"");
-       /* SimpleDateFormat date = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd,yyyy");
-        String start_date = null;
-        String end_date = null;
-        try {
-            Date st_date = date.parse(projectData.getpDateStarts());
-            Date ed_date = date.parse(projectData.getpDateEnds());
-             Log.e("ProFeed","start date:"+st_date);
-             Log.e("ProFeed","end date:"+ed_date);
-            start_date = simpleDateFormat.format(st_date);
-            end_date = simpleDateFormat.format(ed_date);
-        } catch (Exception e) {
-            Log.e("Pro Feed", "Parsing failed miserably " + e);
-        }*/
+        mCreatedByTextView.setText(ProFeedActivity.requiryUserMap.get(projectData.getuID()));
+
         mStartDateTextView.setText(projectData.getpDateStarts());
         mEndDateTextView.setText(projectData.getpDateEnds());
         mDomainTextView.setText(projectData.getpDomain());

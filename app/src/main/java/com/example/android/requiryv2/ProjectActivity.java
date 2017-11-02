@@ -1,9 +1,9 @@
 package com.example.android.requiryv2;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,13 +39,13 @@ public class ProjectActivity extends AppCompatActivity {
         pDiscussionButton = (Button) findViewById(R.id.p_discussions_button);
         pContributorsButton = (Button) findViewById(R.id.p_contributors_button);
 
-        pCreatorId = "1";
-        ValueEventListener listener = new ValueEventListener() {
+        //pCreatorId = "1";
+        /*ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
                     RequiryUser ru = ds.getValue(RequiryUser.class);
-                    pCreatorTV.setText(ru.getuName());
+                    //pCreatorTV.setText(ru.getuName());
                 }
             }
 
@@ -53,26 +53,37 @@ public class ProjectActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        };
+        };*/
 
-        mDatabaseReference.child("requiry_user").orderByChild("uID").equalTo(pCreatorId).addValueEventListener(listener);
-        mDatabaseReference.removeEventListener(listener);
+       /* mDatabaseReference.child("requiry_user").orderByChild("uID").equalTo(pCreatorId).addValueEventListener(listener);
+        mDatabaseReference.removeEventListener(listener);*/
 
         Intent i = getIntent();
-        final Bundle dataFromProfeed = i.getExtras();
-        pId = i.getStringExtra("pID");
-        pNameTV.setText(i.getStringExtra("pName"));
-        pCreatorId = i.getStringExtra("pCreator");
-        pDomainTV.setText(i.getStringExtra("pDomain"));
-        pStartDateTV.setText(i.getStringExtra("pDateStarts"));
-        pEndDateTV.setText(i.getStringExtra("pDateEnds"));
-        pDescriptionTV.setText(i.getStringExtra("pDesc"));
-        pLinkTV.setText(i.getStringExtra("pLink"));
+        Project project = (Project) i.getSerializableExtra("project_data");
 
-        SharedPreferences sp = getSharedPreferences("USer", MODE_PRIVATE);
-        uId = sp.getString("uId", "");
+        pId = project.getpID();
+        pNameTV.setText(project.getpName());
+        pCreatorId = project.getuID();
+        pCreatorTV.setText(ProFeedActivity.requiryUserMap.get(pCreatorId));
+        pDomainTV.setText(project.getpDomain());
+        pStartDateTV.setText(project.getpDateStarts());
+        pEndDateTV.setText(project.getpDateEnds());
+        pDescriptionTV.setText(project.getpDesc());
+        pLinkTV.setText(project.getpLink());
+        pLinkTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("" + pLinkTV.getText()));
+                startActivity(intent);
+            }
+        });
 
-        if(uId.equals(pCreatorTV.getText().toString())){
+        //TODO shared Preferenece for uID
+        // SharedPreferences sp = getSharedPreferences("USer", MODE_PRIVATE);
+        // uId = sp.getString("uId", "");
+        uId = "1";
+
+        if(uId.equals(pCreatorId)){
             pApplyButton.setText("Delete");
             pApplyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -114,8 +125,8 @@ public class ProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), DiscussionsActivity.class);
-                intent.putExtras(dataFromProfeed);
-                startActivity(intent);
+                //intent.putExtras(dataFromProfeed);
+                //startActivity(intent);
             }
         });
 
@@ -123,8 +134,8 @@ public class ProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), ContributorsActivity.class);
-                intent.putExtra("pID", pId);
-                startActivity(intent);
+                //intent.putExtra("pID", pId);
+                //startActivity(intent);
             }
         });
 

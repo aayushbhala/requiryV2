@@ -1,9 +1,11 @@
 package com.example.android.requiryv2;
 
+import java.io.Serializable;
+
 /**
  * Created by MAHE on 01-Nov-17.
  */
-public class Project {
+public class Project implements Serializable {
     private String pID;
     private String uID;
     private String pName;
