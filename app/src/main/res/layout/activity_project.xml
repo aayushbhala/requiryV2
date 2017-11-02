@@ -1,188 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_project"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbarStyle="insideInset"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.android.requiryv2.ProjectActivity">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
-
-    <LinearLayout
-        android:id="@+id/p_name_layout"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Project Name"
-            android:textAllCaps="true"/>
-        <TextView
-            android:id="@+id/p_name_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="XXXXX"
-            android:padding="10dp"/>
-    </LinearLayout>
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/p_creator_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/p_name_layout">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Creator"
-            android:textAllCaps="true"/>
-        <TextView
-            android:id="@+id/p_creator_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="XXXXX"
-            android:padding="10dp"/>
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/pName_Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-    <LinearLayout
-        android:id="@+id/p_domain_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/p_creator_layout">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Project Domain"
-            android:textAllCaps="true"/>
-        <TextView
-            android:id="@+id/p_domain_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="XXXXX"
-            android:padding="10dp"/>
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/pName_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name:"
+                    android:textSize="17sp"
+                    android:textColor="#5b5b5b"/>
+                <TextView
+                    android:id="@+id/pName_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-    <LinearLayout
-        android:id="@+id/p_start_date_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/p_domain_layout">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Start Date"
-            android:textAllCaps="true"/>
-        <TextView
-            android:id="@+id/p_start_date_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="XXXXX"
-            android:padding="10dp"/>
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/p_end_date_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/p_start_date_layout">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="End Date"
-            android:textAllCaps="true"/>
-        <TextView
-            android:id="@+id/p_end_date_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="XXXXX"
-            android:padding="10dp"/>
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/p_description_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/p_end_date_layout">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:textAllCaps="true"/>
-        <TextView
-            android:id="@+id/p_description_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="XXXXX"
-            android:padding="10dp"/>
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/p_link_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/p_description_layout">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Link"
-            android:textAllCaps="true"/>
-        <TextView
-            android:id="@+id/p_link_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="XXXXX"
-            android:textColor="#0008fc"
-            android:padding="10dp"/>
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/pCreator_Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-    <Button
-        android:id="@+id/p_contributors_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contributors"
-        android:textColor="#0008fc"
-        android:background="@android:color/transparent"
-        android:layout_below="@id/p_link_layout"
-        android:padding="10dp"/>
+                <TextView
+                    android:id="@+id/pCreator_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Created by:"
+                    android:textSize="17sp"
+                    android:textColor="#5b5b5b"/>
+                <TextView
+                    android:id="@+id/pCreator_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-    <LinearLayout
-        android:id="@+id/p_button_layout"
-        android:layout_below="@id/p_contributors_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/p_apply_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Apply"
-            android:textColor="#e98000"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"/>
+            <LinearLayout
+                android:id="@+id/pDomain_Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-        <Button
-            android:id="@+id/p_discussions_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Discussions"
-            android:textColor="#e98000"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"/>
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/pDomain_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Domain:"
+                    android:textSize="17sp"
+                    android:textColor="#5b5b5b"/>
+                <TextView
+                    android:id="@+id/pDomain_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pDesc_Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/pDesc_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Description:"
+                    android:textSize="17sp"
+                    android:textColor="#5b5b5b"/>
+                <TextView
+                    android:id="@+id/pDesc_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pLinks_Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/pLinks_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Links to Resources:"
+                    android:textSize="17sp"
+                    android:textColor="#5b5b5b"/>
+                <TextView
+                    android:id="@+id/pLinks_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#0008fc"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pStarted_Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/pStarted_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Date Started:"
+                    android:textSize="17sp"
+                    android:textColor="#5b5b5b"/>
+                <TextView
+                    android:id="@+id/pStarted_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pETC_Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/pETC_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Estimated Time of Completion:"
+                    android:textSize="17sp"
+                    android:textColor="#5b5b5b"/>
+                <TextView
+                    android:id="@+id/pETC_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <Button
+                android:paddingLeft="10dp"
+                android:id="@+id/contributors_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="Contributors"
+                android:textAllCaps="false"
+                android:textSize="17sp"
+                android:textAlignment="viewStart"
+                android:textColor="#0008fc"/>
+
+            <LinearLayout
+                android:id="@+id/Buttons_Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <Button
+                    android:id="@+id/apply_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apply"
+                    android:textColor="#e98000"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent" />
+                <Button
+                    android:id="@+id/discuss_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Discussions"
+                    android:textColor="#e98000"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
-
-</ScrollView>

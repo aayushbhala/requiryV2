@@ -28,35 +28,17 @@ public class ProjectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project);
 
-        pNameTV = (TextView) findViewById(R.id.p_name_text_view);
-        pCreatorTV = (TextView) findViewById(R.id.p_creator_text_view);
-        pDomainTV = (TextView) findViewById(R.id.p_domain_text_view);
-        pStartDateTV = (TextView) findViewById(R.id.p_start_date_text_view);
-        pEndDateTV = (TextView) findViewById(R.id.p_end_date_text_view);
-        pDescriptionTV = (TextView) findViewById(R.id.p_description_text_view);
-        pLinkTV = (TextView) findViewById(R.id.p_link_text_view);
-        pApplyButton = (Button) findViewById(R.id.p_apply_button);
-        pDiscussionButton = (Button) findViewById(R.id.p_discussions_button);
-        pContributorsButton = (Button) findViewById(R.id.p_contributors_button);
+        pNameTV = (TextView) findViewById(R.id.pName_textView);
+        pCreatorTV = (TextView) findViewById(R.id.pCreator_textView);
+        pDomainTV = (TextView) findViewById(R.id.pDomain_textView);
+        pStartDateTV = (TextView) findViewById(R.id.pStarted_textView);
+        pEndDateTV = (TextView) findViewById(R.id.pETC_textView);
+        pDescriptionTV = (TextView) findViewById(R.id.pDesc_textView);
+        pLinkTV = (TextView) findViewById(R.id.pLinks_textView);
+        pApplyButton = (Button) findViewById(R.id.apply_button);
+        pDiscussionButton = (Button) findViewById(R.id.discuss_button);
+        pContributorsButton = (Button) findViewById(R.id.contributors_button);
 
-        //pCreatorId = "1";
-        /*ValueEventListener listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    RequiryUser ru = ds.getValue(RequiryUser.class);
-                    //pCreatorTV.setText(ru.getuName());
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };*/
-
-       /* mDatabaseReference.child("requiry_user").orderByChild("uID").equalTo(pCreatorId).addValueEventListener(listener);
-        mDatabaseReference.removeEventListener(listener);*/
 
         Intent i = getIntent();
         Project project = (Project) i.getSerializableExtra("project_data");
