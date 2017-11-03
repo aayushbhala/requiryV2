@@ -72,6 +72,7 @@ public class ProjectActivity extends AppCompatActivity {
 
         if(uId.equals(pCreatorId)){
             pApplyButton.setText("Delete");
+            fab.setVisibility(View.VISIBLE);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -49,9 +49,6 @@ public class SignUpActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setCustomView(v);
-        EditText searchET = (EditText) findViewById(R.id.actionbar_edit_text);
-        searchET.setVisibility(View.INVISIBLE);
-
         flag = false;
         mRegisterButton = (Button) findViewById(R.id.registerButton);
         mNameEditText = (EditText) findViewById(R.id.input_nameEditText);

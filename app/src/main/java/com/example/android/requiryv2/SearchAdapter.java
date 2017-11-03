@@ -33,7 +33,7 @@ public class SearchAdapter extends ArrayAdapter<String> {
         TextView usernameTV = (TextView) listItemView.findViewById(R.id.user_name_text_view);
         if(ProFeedActivity.requiryUserMap.containsKey(currentuID)){
             RequiryUser requiryUser = ProFeedActivity.requiryUserMap.get(currentuID);
-            mCirculatTV.setText(requiryUser.getuName().charAt(0));
+            mCirculatTV.setText(""+requiryUser.getuName().charAt(0));
             usernameTV.setText(requiryUser.getuName());
         }
 

@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,14 +28,14 @@ public class AddUserActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         LayoutInflater inflater = LayoutInflater.from(this);
         View v = inflater.inflate(R.layout.action_bar, null);
-        TextView actionbar_title = (TextView)v.findViewById(R.id.action_bar_title);
-        actionbar_title.setVisibility(View.INVISIBLE);
-        searchET = (EditText) findViewById(R.id.actionbar_edit_text);
-        searchET.setVisibility(View.VISIBLE);
+        TextView actionbar_title = v.findViewById(R.id.action_bar_title);
+        actionbar_title.setText("Add contributor");
         assert actionBar != null;
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setCustomView(v);
+        searchET = (EditText) findViewById(R.id.actionbar_edit_text);
         userList = new ArrayList<>(ProFeedActivity.requiryUserMap.keySet());
+        Log.e("Add user Act",userList.get(0)+" "+userList.get(1));
         handleIntent();
     }
     private void handleIntent() {
@@ -55,7 +56,7 @@ public class AddUserActivity extends AppCompatActivity {
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     //listView.setVisibility(View.VISIBLE);
-                    searchAdapter.getFilter().filter(charSequence);
+                    searchAdapter.filter(charSequence.toString());
                 }
 
                 @Override

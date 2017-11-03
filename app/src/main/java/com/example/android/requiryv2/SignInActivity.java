@@ -91,6 +91,12 @@ public class SignInActivity extends Activity {
 
             }
         });
+        SharedPreferences sp = getSharedPreferences("User", MODE_PRIVATE);
+        if(sp.getString("uUsername","").length() != 0){
+            Intent nextScreen = new Intent(SignInActivity.this, SplashScreen.class);
+            startActivity(nextScreen);
+        }
+
     }
 
     public boolean validateEntry(){
