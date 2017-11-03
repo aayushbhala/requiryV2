@@ -9,7 +9,7 @@ public class Contributer implements Serializable{
 
     private String pId;
     private String uId;
-
+    public Contributer(){}
     public Contributer(String pId, String uId) {
         this.pId = pId;
         this.uId = uId;

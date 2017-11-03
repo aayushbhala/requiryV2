@@ -12,7 +12,9 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -66,12 +68,11 @@ public class AddUserActivity extends AppCompatActivity {
             });
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    // Intent intent1 = new Intent(SearchableActivity.this, StockEditorActivity.class);
-                    Toast.makeText(AddUserActivity.this, "Feature comming soon", Toast.LENGTH_SHORT).show();
-                    // startActivity(intent1);
-                    // finish();
-
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    DatabaseReference contridbRef = FirebaseDatabase.getInstance().getReference().child("contributor");
+                    Contributer user = new Contributer(getIntent().getStringExtra("pID"),searchAdapter.getItem(i));
+                    contridbRef.push().setValue(user);
+                    finish();
                 }
             });
 

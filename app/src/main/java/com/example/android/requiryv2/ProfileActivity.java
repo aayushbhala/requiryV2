@@ -37,8 +37,8 @@ public class ProfileActivity extends AppCompatActivity {
         uWho = (TextView) findViewById(R.id.user_profile_who);
         deleteProfile = (Button) findViewById(R.id.deleteButton);
 
-        Bundle userDetails = getIntent().getExtras();
-        uId = userDetails.getString("uID", "");
+        //Bundle userDetails = getIntent().getExtras();
+        uId = getIntent().getStringExtra("uID");
 
         requiryUser = ProFeedActivity.requiryUserMap.get(uId);
         /*
@@ -58,7 +58,7 @@ public class ProfileActivity extends AppCompatActivity {
         mDatabaseReference.child("requiry_user").orderByChild("uID").equalTo(uId).addValueEventListener(listener);
         mDatabaseReference.removeEventListener(listener);
         */
-        uProfilePic.setText(requiryUser.getuName().charAt(0));
+        uProfilePic.setText(""+requiryUser.getuName().charAt(0));
         uName.setText(requiryUser.getuName());
         uWho.setText(requiryUser.getuWho().equals("1") ? "Faculty" :  "Student");
         uDesc.setText(requiryUser.getuDesc());

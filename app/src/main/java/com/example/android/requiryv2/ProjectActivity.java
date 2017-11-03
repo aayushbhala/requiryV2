@@ -77,6 +77,7 @@ public class ProjectActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(ProjectActivity.this,AddUserActivity.class);
+                    intent.putExtra("pID",pId);
                     startActivity(intent);
                 }
             });
@@ -129,8 +130,8 @@ public class ProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), ContributorsActivity.class);
-                //intent.putExtra("pID", pId);
-                //startActivity(intent);
+                intent.putExtra("pID", pId);
+                startActivity(intent);
             }
         });
 
