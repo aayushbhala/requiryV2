@@ -1,9 +1,9 @@
 package com.example.android.requiryv2;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,49 +28,41 @@ public class ProjectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project);
 
-        pNameTV = (TextView) findViewById(R.id.p_name_text_view);
-        pCreatorTV = (TextView) findViewById(R.id.p_creator_text_view);
-        pDomainTV = (TextView) findViewById(R.id.p_domain_text_view);
-        pStartDateTV = (TextView) findViewById(R.id.p_start_date_text_view);
-        pEndDateTV = (TextView) findViewById(R.id.p_end_date_text_view);
-        pDescriptionTV = (TextView) findViewById(R.id.p_description_text_view);
-        pLinkTV = (TextView) findViewById(R.id.p_link_text_view);
-        pApplyButton = (Button) findViewById(R.id.p_apply_button);
-        pDiscussionButton = (Button) findViewById(R.id.p_discussions_button);
-        pContributorsButton = (Button) findViewById(R.id.p_contributors_button);
+        pNameTV = (TextView) findViewById(R.id.pName_textView);
+        pCreatorTV = (TextView) findViewById(R.id.pCreator_textView);
+        pDomainTV = (TextView) findViewById(R.id.pDomain_textView);
+        pStartDateTV = (TextView) findViewById(R.id.pStarted_textView);
+        pEndDateTV = (TextView) findViewById(R.id.pETC_textView);
+        pDescriptionTV = (TextView) findViewById(R.id.pDesc_textView);
+        pLinkTV = (TextView) findViewById(R.id.pLinks_textView);
+        pApplyButton = (Button) findViewById(R.id.apply_button);
+        pDiscussionButton = (Button) findViewById(R.id.discuss_button);
+        pContributorsButton = (Button) findViewById(R.id.contributors_button);
 
-        ValueEventListener listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    RequiryUser ru = ds.getValue(RequiryUser.class);
-                    pCreatorTV.setText(ru.getuName());
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
 
         Intent i = getIntent();
-        final Bundle dataFromProfeed = i.getExtras();
-        pId = i.getStringExtra("pID");
-        pNameTV.setText(i.getStringExtra("pName"));
-        pCreatorId = i.getStringExtra("pCreator");
-        pDomainTV.setText(i.getStringExtra("pDomain"));
-        pStartDateTV.setText(i.getStringExtra("pDateStarts"));
-        pEndDateTV.setText(i.getStringExtra("pDateEnds"));
-        pDescriptionTV.setText(i.getStringExtra("pDesc"));
-        pLinkTV.setText(i.getStringExtra("pLink"));
+        Project project = (Project) i.getSerializableExtra("project_data");
 
-        //SharedPreferences sp = getSharedPreferences("USer", MODE_PRIVATE);
-        //uId = sp.getString("uId", "");
+        pId = project.getpID();
+        pNameTV.setText(project.getpName());
+        pCreatorId = project.getuID();
+        pCreatorTV.setText(ProFeedActivity.requiryUserMap.get(pCreatorId));
+        pDomainTV.setText(project.getpDomain());
+        pStartDateTV.setText(project.getpDateStarts());
+        pEndDateTV.setText(project.getpDateEnds());
+        pDescriptionTV.setText(project.getpDesc());
+        pLinkTV.setText(project.getpLink());
+        pLinkTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("" + pLinkTV.getText()));
+                startActivity(intent);
+            }
+        });
 
-        mDatabaseReference.child("requiry_user").orderByChild("uID").equalTo(pCreatorId).addValueEventListener(listener);
-        mDatabaseReference.removeEventListener(listener);
-
+        //TODO shared Preferenece for uID
+        // SharedPreferences sp = getSharedPreferences("USer", MODE_PRIVATE);
+        // uId = sp.getString("uId", "");
         uId = "1";
 
         if(uId.equals(pCreatorId)){
@@ -92,7 +84,7 @@ public class ProjectActivity extends AppCompatActivity {
 
                     Toast.makeText(getBaseContext(), "Deleted Project", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(getBaseContext(), ProFeedActivity.class);
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
                     startActivity(intent);
                 }
             });
@@ -115,8 +107,8 @@ public class ProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), DiscussionsActivity.class);
-                intent.putExtras(dataFromProfeed);
-                startActivity(intent);
+                //intent.putExtras(dataFromProfeed);
+                //startActivity(intent);
             }
         });
 
@@ -124,8 +116,8 @@ public class ProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), ContributorsActivity.class);
-                intent.putExtra("pID", pId);
-                startActivity(intent);
+                //intent.putExtra("pID", pId);
+                //startActivity(intent);
             }
         });
 

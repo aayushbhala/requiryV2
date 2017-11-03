@@ -18,11 +18,13 @@
         android:gravity="bottom"/>
     <Button
         android:id="@+id/profeedButton"
-        android:text="Click Here!"
+        android:text="ProFeed Here!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <ListView
-        android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/signup"
+        android:text="SignUp Here!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>

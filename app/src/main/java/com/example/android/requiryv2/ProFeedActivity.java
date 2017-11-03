@@ -2,6 +2,7 @@ package com.example.android.requiryv2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,41 +13,63 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-
+import java.util.HashMap;
+/**
+ * Created by aayuhbhala on 01/11/17.
+ */
 public class ProFeedActivity extends AppCompatActivity {
     private ChildEventListener mProFeedEventListener;
     private ProFeedAdapter mProFeedAdapter;
     private FirebaseDatabase mProjectDatabase;
     private DatabaseReference mProjectDatabaseRefernce;
     private ListView listView;
+    private ArrayList<Project> projectData;
+    public static HashMap<String,String> requiryUserMap = new HashMap<>(100);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pro_feed);
-        final ArrayList<Project> projectData = new ArrayList<>();
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_action_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProFeedActivity.this, CreateProject.class);
+                startActivity(intent);
 
+            }
+        });
+        projectData = new ArrayList<>();
         mProFeedAdapter = new ProFeedAdapter(this,projectData);
         listView = (ListView) findViewById(R.id.profeed_list_view);
         listView.setAdapter(mProFeedAdapter);
+        DatabaseReference requirydatabaseRef = FirebaseDatabase.getInstance().getReference().child("requiry_user");
+        requirydatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    RequiryUser ru = postSnapshot.getValue(RequiryUser.class);
+                    requiryUserMap.put(ru.getuID(), ru.getuName());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         mProjectDatabase = FirebaseDatabase.getInstance();
         mProjectDatabaseRefernce = mProjectDatabase.getReference().child("project");
-
-        Project project = new Project("1","1",
-                "Video Indexing","Deep Learning",
-                "2017-03-08",
-                "2017-05-09",
-                "Machine Learning",
-                "https://en.wikipedia.org/wiki/Gravity");
-        mProjectDatabaseRefernce.push().setValue(project);
-
         mProFeedEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Project pD = dataSnapshot.getValue(Project.class);
-                mProFeedAdapter.add(pD);
+                Project project = dataSnapshot.getValue(Project.class);
+                mProFeedAdapter.add(project);
                 mProFeedAdapter.notifyDataSetChanged();
             }
 
@@ -57,13 +80,8 @@ public class ProFeedActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Project pD = dataSnapshot.getValue(Project.class);
-                for(int i=0; i<projectData.size(); i++){
-                    if(projectData.get(i).getpID().equals(pD.getpID())) {
-                        projectData.remove(i);
-                        break;
-                    }
-                }
+                Project project = dataSnapshot.getValue(Project.class);
+                mProFeedAdapter.remove(ProFeedAdapter.hashMap.get(project.getpID()));
                 mProFeedAdapter.notifyDataSetChanged();
             }
 
@@ -78,24 +96,15 @@ public class ProFeedActivity extends AppCompatActivity {
             }
         };
         mProjectDatabaseRefernce.addChildEventListener(mProFeedEventListener);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                Project p = projectData.get(pos);
-                Intent intent = new Intent(getBaseContext(), ProjectActivity.class);
-                intent.putExtra("pID", p.getpID());
-                intent.putExtra("pName", p.getpName());
-                intent.putExtra("pCreator", p.getuID());
-                intent.putExtra("pDateStarts", p.getpDateStarts());
-                intent.putExtra("pDateEnds", p.getpDateEnds());
-                intent.putExtra("pDesc", p.getpDesc());
-                intent.putExtra("pDomain", p.getpDomain());
-                intent.putExtra("pLink", p.getpLink());
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(ProFeedActivity.this,ProjectActivity.class);
+                Project project = (Project) adapterView.getAdapter().getItem(i);
+                intent.putExtra("project_data", (Serializable) project);
                 startActivity(intent);
             }
         });
+
     }
-
-
 }

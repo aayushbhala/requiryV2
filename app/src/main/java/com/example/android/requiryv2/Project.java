@@ -1,9 +1,11 @@
 package com.example.android.requiryv2;
 
+import java.io.Serializable;
+
 /**
  * Created by MAHE on 01-Nov-17.
  */
-public class Project {
+public class Project implements Serializable {
     private String pID;
     private String uID;
     private String pName;
@@ -16,15 +18,15 @@ public class Project {
     public Project() {
     }
 
-    public Project(String pID, String uID, String pName, String pDomain, String pDateStarts, String pDateEnds, String pDesc, String pLink) {
+    public Project(String pID, String uID, String pName, String pDomain, String pDateStarts, String pDateEnds, String pDesc, String pLink){
         this.pID = pID;
         this.uID = uID;
         this.pName = pName;
         this.pDomain = pDomain;
         this.pDateStarts = pDateStarts;
         this.pDateEnds = pDateEnds;
-        this.pDesc = pDesc;
         this.pLink = pLink;
+        this.pDesc = pDesc;
     }
 
     public String getpID() {
