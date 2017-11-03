@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:elevation="4dp">
+        <TextView
+            android:id="@+id/text_circle_username"
+            android:layout_marginLeft="5dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/magnitude_circle"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            tools:text="A" />
+
+        <TextView
+            android:id="@+id/user_name_text_view"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="monospace"
+            android:textColor="#000"
+            tools:text = "Aayush Bhala"/>
+    </LinearLayout>
+
+</RelativeLayout>

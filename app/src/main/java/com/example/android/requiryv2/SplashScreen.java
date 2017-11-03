@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +29,8 @@ public class SplashScreen extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setCustomView(v);
+        EditText searchET = (EditText) findViewById(R.id.actionbar_edit_text);
+        searchET.setVisibility(View.INVISIBLE);
         msplashTextView = (TextView) findViewById(R.id.splash_tv);
         imageView = (ImageView) findViewById(R.id.imgLogo);
         Animation anim = AnimationUtils.loadAnimation(this,R.anim.mytransition);

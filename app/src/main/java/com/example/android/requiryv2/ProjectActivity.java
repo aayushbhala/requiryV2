@@ -3,6 +3,7 @@ package com.example.android.requiryv2;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -38,7 +39,8 @@ public class ProjectActivity extends AppCompatActivity {
         pApplyButton = (Button) findViewById(R.id.apply_button);
         pDiscussionButton = (Button) findViewById(R.id.discuss_button);
         pContributorsButton = (Button) findViewById(R.id.contributors_button);
-
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.search_member_fab);
+        fab.setVisibility(View.INVISIBLE);
 
         Intent i = getIntent();
         Project project = (Project) i.getSerializableExtra("project_data");
@@ -46,7 +48,8 @@ public class ProjectActivity extends AppCompatActivity {
         pId = project.getpID();
         pNameTV.setText(project.getpName());
         pCreatorId = project.getuID();
-        pCreatorTV.setText(ProFeedActivity.requiryUserMap.get(pCreatorId));
+        if(ProFeedActivity.requiryUserMap.containsKey(pCreatorId))
+            pCreatorTV.setText(ProFeedActivity.requiryUserMap.get(pCreatorId).getuName());
         pDomainTV.setText(project.getpDomain());
         pStartDateTV.setText(project.getpDateStarts());
         pEndDateTV.setText(project.getpDateEnds());
@@ -67,6 +70,13 @@ public class ProjectActivity extends AppCompatActivity {
 
         if(uId.equals(pCreatorId)){
             pApplyButton.setText("Delete");
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ProjectActivity.this,AddUserActivity.class);
+                    startActivity(intent);
+                }
+            });
             pApplyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

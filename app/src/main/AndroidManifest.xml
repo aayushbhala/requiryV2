@@ -25,9 +25,11 @@
         <activity android:name=".ContributorsActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".CreateProject" />
-        <activity android:name=".SplashScreen"
+        <activity
+            android:name=".SplashScreen"
             android:screenOrientation="portrait"
-            android:theme="@style/splash_screen"/>
+            android:theme="@style/splash_screen" />
+        <activity android:name=".AddUserActivity"></activity>
     </application>
 
 </manifest>
