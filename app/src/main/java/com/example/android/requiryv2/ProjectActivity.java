@@ -39,7 +39,6 @@ public class ProjectActivity extends AppCompatActivity {
         pDiscussionButton = (Button) findViewById(R.id.p_discussions_button);
         pContributorsButton = (Button) findViewById(R.id.p_contributors_button);
 
-        pCreatorId = "1";
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -55,9 +54,6 @@ public class ProjectActivity extends AppCompatActivity {
             }
         };
 
-        mDatabaseReference.child("requiry_user").orderByChild("uID").equalTo(pCreatorId).addValueEventListener(listener);
-        mDatabaseReference.removeEventListener(listener);
-
         Intent i = getIntent();
         final Bundle dataFromProfeed = i.getExtras();
         pId = i.getStringExtra("pID");
@@ -69,10 +65,15 @@ public class ProjectActivity extends AppCompatActivity {
         pDescriptionTV.setText(i.getStringExtra("pDesc"));
         pLinkTV.setText(i.getStringExtra("pLink"));
 
-        SharedPreferences sp = getSharedPreferences("USer", MODE_PRIVATE);
-        uId = sp.getString("uId", "");
+        //SharedPreferences sp = getSharedPreferences("USer", MODE_PRIVATE);
+        //uId = sp.getString("uId", "");
 
-        if(uId.equals(pCreatorTV.getText().toString())){
+        mDatabaseReference.child("requiry_user").orderByChild("uID").equalTo(pCreatorId).addValueEventListener(listener);
+        mDatabaseReference.removeEventListener(listener);
+
+        uId = "1";
+
+        if(uId.equals(pCreatorId)){
             pApplyButton.setText("Delete");
             pApplyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -91,7 +92,7 @@ public class ProjectActivity extends AppCompatActivity {
 
                     Toast.makeText(getBaseContext(), "Deleted Project", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    Intent intent = new Intent(getBaseContext(), ProFeedActivity.class);
                     startActivity(intent);
                 }
             });

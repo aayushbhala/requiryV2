@@ -12,6 +12,7 @@ public class RequiryUser {
     private String uWho;
     private String uDesc;
 
+
     public RequiryUser() {
     }
 
@@ -24,6 +25,8 @@ public class RequiryUser {
         this.uWho = uWho;
         this.uDesc = uDesc;
     }
+
+
 
     public String getuID() {
         return uID;

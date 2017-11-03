@@ -51,7 +51,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
             <TextView
-                android:id="@+id/user_who"
+                android:id="@+id/user_profile_who"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Faculty"

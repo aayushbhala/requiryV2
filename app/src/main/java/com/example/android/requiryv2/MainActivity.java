@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //RequiryUser requiryUser = new RequiryUser(1, "Aayush Bhala", "9972244005", "aayushbest@gmail.com", "aayushbhala", 1, "Student at MIT Manipal");
-                Project project = new Project(3,3,
+                Project project = new Project("3","3",
                         "Gravitational Force","Physics",
                         "2017-03-08",
                         "2017-05-09",

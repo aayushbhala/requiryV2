@@ -4,8 +4,8 @@ package com.example.android.requiryv2;
  * Created by MAHE on 01-Nov-17.
  */
 public class Project {
-    private int pID;
-    private int uID;
+    private String pID;
+    private String uID;
     private String pName;
     private String pDomain;
     private String pDateStarts;
@@ -16,30 +16,30 @@ public class Project {
     public Project() {
     }
 
-    public Project(int pID, int uID, String pName, String pDomain, String pDateStarts, String pDateEnds, String pDesc, String pLink){
+    public Project(String pID, String uID, String pName, String pDomain, String pDateStarts, String pDateEnds, String pDesc, String pLink) {
         this.pID = pID;
         this.uID = uID;
         this.pName = pName;
         this.pDomain = pDomain;
         this.pDateStarts = pDateStarts;
         this.pDateEnds = pDateEnds;
-        this.pLink = pLink;
         this.pDesc = pDesc;
+        this.pLink = pLink;
     }
 
-    public int getpID() {
+    public String getpID() {
         return pID;
     }
 
-    public void setpID(int pID) {
+    public void setpID(String pID) {
         this.pID = pID;
     }
 
-    public int getuID() {
+    public String getuID() {
         return uID;
     }
 
-    public void setuID(int uID) {
+    public void setuID(String uID) {
         this.uID = uID;
     }
 
