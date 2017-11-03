@@ -1,6 +1,8 @@
 package com.example.android.requiryv2;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -89,8 +91,12 @@ public class CreateProject extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         String dateStarts = dateFormat.format(date);
-        Project project = new Project("4","2",name,domain,dateStarts,etc,desc,links);
-        mProjectDatbaseRef.push().setValue(project);
+
+        SharedPreferences sp = getSharedPreferences("User", MODE_PRIVATE);
+        String uId = sp.getString("uID", "");
+        DatabaseReference newRef = mProjectDatbaseRef.push();
+        Project project = new Project(newRef.getKey(), uId,name,domain,dateStarts,etc,desc,links);
+        newRef.setValue(project);
         finish();
     }
 }

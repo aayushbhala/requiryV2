@@ -28,7 +28,13 @@ public class ProFeedActivity extends AppCompatActivity {
     private DatabaseReference mProjectDatabaseRefernce;
     private ListView listView;
     private ArrayList<Project> projectData;
+<<<<<<< HEAD
     public static HashMap<String,RequiryUser> requiryUserMap = new HashMap<>(100);
+||||||| merged common ancestors
+    public static HashMap<String,String> requiryUserMap = new HashMap<>(100);
+=======
+    public static HashMap<String, RequiryUser> requiryUserMap = new HashMap<>(100);
+>>>>>>> fbabd56d0fbf3b653993de0a3bd50561bff1f9f9
 
 
     @Override

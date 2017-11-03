@@ -1,6 +1,7 @@
 package com.example.android.requiryv2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -48,8 +49,10 @@ public class ProjectActivity extends AppCompatActivity {
         pId = project.getpID();
         pNameTV.setText(project.getpName());
         pCreatorId = project.getuID();
-        if(ProFeedActivity.requiryUserMap.containsKey(pCreatorId))
-            pCreatorTV.setText(ProFeedActivity.requiryUserMap.get(pCreatorId).getuName());
+        String creator = "";
+        if(ProFeedActivity.requiryUserMap.containsKey(project.getuID()))
+            creator = ProFeedActivity.requiryUserMap.get(project.getuID()).getuName();
+        pCreatorTV.setText(creator);
         pDomainTV.setText(project.getpDomain());
         pStartDateTV.setText(project.getpDateStarts());
         pEndDateTV.setText(project.getpDateEnds());
@@ -63,10 +66,9 @@ public class ProjectActivity extends AppCompatActivity {
             }
         });
 
-        //TODO shared Preferenece for uID
-        // SharedPreferences sp = getSharedPreferences("USer", MODE_PRIVATE);
-        // uId = sp.getString("uId", "");
-        uId = "1";
+
+        SharedPreferences sp = getSharedPreferences("User", MODE_PRIVATE);
+        uId = sp.getString("uID", "");
 
         if(uId.equals(pCreatorId)){
             pApplyButton.setText("Delete");

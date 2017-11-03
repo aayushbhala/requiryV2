@@ -8,16 +8,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".SignInActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".ProFeedActivity" />
         <activity android:name=".ProjectActivity" />
         <activity android:name=".ProfileActivity" />
@@ -28,6 +33,7 @@
         <activity
             android:name=".SplashScreen"
             android:screenOrientation="portrait"
+
             android:theme="@style/splash_screen" />
         <activity android:name=".AddUserActivity"></activity>
     </application>
