@@ -28,7 +28,7 @@ public class ProFeedActivity extends AppCompatActivity {
     private DatabaseReference mProjectDatabaseRefernce;
     private ListView listView;
     private ArrayList<Project> projectData;
-    public static HashMap<String,String> requiryUserMap = new HashMap<>(100);
+    public static HashMap<String, RequiryUser> requiryUserMap = new HashMap<>(100);
 
 
     @Override
@@ -54,7 +54,7 @@ public class ProFeedActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     RequiryUser ru = postSnapshot.getValue(RequiryUser.class);
-                    requiryUserMap.put(ru.getuID(), ru.getuName());
+                    requiryUserMap.put(ru.getuID(), ru);
                 }
             }
 

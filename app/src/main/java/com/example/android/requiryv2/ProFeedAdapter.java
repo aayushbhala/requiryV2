@@ -52,7 +52,10 @@ public class ProFeedAdapter extends ArrayAdapter<Project> {
         mProjectNameTextView.setText(projectData.getpName());
         mCircularTextView.setText(""+projectData.getpName().charAt(0));
         mCreatedByTextView.setText(projectData.getuID()+"");
-        mCreatedByTextView.setText(ProFeedActivity.requiryUserMap.get(projectData.getuID()));
+        String creator = "";
+        if(ProFeedActivity.requiryUserMap.containsKey(projectData.getuID()))
+            creator = ProFeedActivity.requiryUserMap.get(projectData.getuID()).getuName();
+        mCreatedByTextView.setText(creator);
 
         mStartDateTextView.setText(projectData.getpDateStarts());
         mEndDateTextView.setText(projectData.getpDateEnds());

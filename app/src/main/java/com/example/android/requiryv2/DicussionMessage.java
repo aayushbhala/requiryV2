@@ -1,9 +1,11 @@
 package com.example.android.requiryv2;
 
+import java.io.Serializable;
+
 /**
  * Created by upamanyughose on 01/11/17.
  */
-public class DicussionMessage {
+public class DicussionMessage implements Serializable{
 
     private String pId;
     private String uId;

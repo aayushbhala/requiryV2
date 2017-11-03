@@ -40,6 +40,8 @@ public class ProfileActivity extends AppCompatActivity {
         Bundle userDetails = getIntent().getExtras();
         uId = userDetails.getString("uID", "");
 
+        requiryUser = ProFeedActivity.requiryUserMap.get(uId);
+        /*
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -55,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
         };
         mDatabaseReference.child("requiry_user").orderByChild("uID").equalTo(uId).addValueEventListener(listener);
         mDatabaseReference.removeEventListener(listener);
-
+        */
         uProfilePic.setText(requiryUser.getuName().charAt(0));
         uName.setText(requiryUser.getuName());
         uWho.setText(requiryUser.getuWho().equals("1") ? "Faculty" :  "Student");

@@ -1,9 +1,11 @@
 package com.example.android.requiryv2;
 
+import java.io.Serializable;
+
 /**
  * Created by upamanyughose on 01/11/17.
  */
-public class Domain {
+public class Domain implements Serializable{
 
     private String dName;
     private int dNumOfProj;

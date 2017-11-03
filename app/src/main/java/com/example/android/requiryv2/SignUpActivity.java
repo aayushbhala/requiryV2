@@ -2,6 +2,7 @@ package com.example.android.requiryv2;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -88,6 +89,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+
     public void registerUser(){
         name = mNameEditText.getText().toString().trim();
         if(!TextUtils.isEmpty(mNumberEditText.getText().toString().trim()))
@@ -127,10 +129,23 @@ public class SignUpActivity extends AppCompatActivity {
             who = "0";
         else
             who="1";
-        RequiryUser ru = new RequiryUser("3",name,number,email,username,who,desc);
-        mRequiryDatabaseRef.push().setValue(ru);
+
+        DatabaseReference newRef = mRequiryDatabaseRef.push();
+        RequiryUser ru = new RequiryUser(newRef.getKey(),name,number,email,username,who,desc,password);
+        newRef.setValue(ru);
         //TODO Add shared Preference here on success
-        Intent intent  = new Intent(SignUpActivity.this,ProFeedActivity.class);
+        SharedPreferences sp = getSharedPreferences("User", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("uID", ru.getuID());
+        editor.putString("uName", ru.getuName());
+        editor.putString("uUsername", ru.getuUsername());
+        editor.putString("uPassword", ru.getuPassword());
+        editor.putString("uEmail", ru.getuEmail());
+        editor.putString("uNumber", ru.getuNumber());
+        editor.putString("uWho", ru.getuWho());
+        editor.putString("uDes", ru.getuDesc());
+        editor.commit();
+        Intent intent  = new Intent(SignUpActivity.this, ProFeedActivity.class);
         startActivity(intent);
         finish();
 
