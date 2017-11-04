@@ -1,19 +1,21 @@
 package com.example.android.requiryv2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -50,13 +52,46 @@ public class ProFeedActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.profeed_list_view);
         listView.setAdapter(mProFeedAdapter);
         DatabaseReference requirydatabaseRef = FirebaseDatabase.getInstance().getReference().child("requiry_user");
-        requirydatabaseRef.addValueEventListener(new ValueEventListener() {
+        requirydatabaseRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    RequiryUser ru = postSnapshot.getValue(RequiryUser.class);
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    RequiryUser ru = dataSnapshot.getValue(RequiryUser.class);
                     requiryUserMap.put(ru.getuID(), ru);
+                    Log.e("ProFeed",ru.getuID());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                RequiryUser requiryUser = dataSnapshot.getValue(RequiryUser.class);
+                SharedPreferences sp = getSharedPreferences("User",MODE_PRIVATE);
+                if(sp.getString("uID","").equals(requiryUser.getuID())){
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("uID", "");
+                    editor.putString("uName","");
+                    editor.putString("uUsername", "");
+                    editor.putString("uPassword", "");
+                    editor.putString("uEmail", "");
+                    editor.putString("uNumber", "");
+                    editor.putString("uWho", "");
+                    editor.putString("uDes", "");
+                    editor.commit();
+                    ProFeedActivity.requiryUserMap.remove(sp.getString("uID",""));
+                    //TODO Add clean slate code here
+                    Toast.makeText(ProFeedActivity.this, "Your account has been deactivated", Toast.LENGTH_SHORT).show();
+                    finish();
+                    Intent intent = new Intent(ProFeedActivity.this,SignInActivity.class);
+                    startActivity(intent);
                 }
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override

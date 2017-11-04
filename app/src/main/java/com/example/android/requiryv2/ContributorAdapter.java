@@ -26,15 +26,20 @@ public class ContributorAdapter extends ArrayAdapter<Contributer> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.contributor_adapter,parent,false);
         }
         Contributer currentContributor = (Contributer) getItem(position);
+
         Log.e("Contributor ",currentContributor.getpId()+ " " + currentContributor.getuId());
         TextView mCircularTV = (TextView) listItemView.findViewById(R.id.contributor_text_view);
         TextView usernameTV = (TextView) listItemView.findViewById(R.id.contributor_name_text_view);
         if(pID.equals(currentContributor.getpId())) {
             if (ProFeedActivity.requiryUserMap.containsKey(currentContributor.getuId())) {
                 RequiryUser requiryUser = ProFeedActivity.requiryUserMap.get(currentContributor.getuId());
-                mCircularTV.setText("" + requiryUser.getuName().charAt(0));
-                usernameTV.setText(requiryUser.getuName());
+                if(!requiryUser.getuName().equals("")) {
+                    mCircularTV.setText("" + requiryUser.getuName().charAt(0));
+                    usernameTV.setText(requiryUser.getuName());
+                }
             }
+        }else {
+            listItemView.setVisibility(View.INVISIBLE);
         }
 
         return listItemView;

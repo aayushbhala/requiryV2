@@ -98,8 +98,7 @@ public class ProjectActivity extends AppCompatActivity {
 
                     Toast.makeText(getBaseContext(), "Deleted Project", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                    startActivity(intent);
+                    finish();
                 }
             });
         }

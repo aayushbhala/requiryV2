@@ -1,8 +1,10 @@
 package com.example.android.requiryv2;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,25 +41,13 @@ public class ProfileActivity extends AppCompatActivity {
 
         //Bundle userDetails = getIntent().getExtras();
         uId = getIntent().getStringExtra("uID");
+        Log.e("Profilr Act",""+uId);
 
         requiryUser = ProFeedActivity.requiryUserMap.get(uId);
-        /*
-        ValueEventListener listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    requiryUser = ds.getValue(RequiryUser.class);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-        mDatabaseReference.child("requiry_user").orderByChild("uID").equalTo(uId).addValueEventListener(listener);
-        mDatabaseReference.removeEventListener(listener);
-        */
+        SharedPreferences sp = getSharedPreferences("User", MODE_PRIVATE);
+        if(!sp.getString("uID","").equals(requiryUser)){
+            deleteProfile.setVisibility(View.INVISIBLE);
+        }
         uProfilePic.setText(""+requiryUser.getuName().charAt(0));
         uName.setText(requiryUser.getuName());
         uWho.setText(requiryUser.getuWho().equals("1") ? "Faculty" :  "Student");
@@ -82,7 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
                 mDatabaseReference.removeEventListener(l);
 
                 Toast.makeText(getBaseContext(), "Deleted Profile", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                Intent intent = new Intent(getBaseContext(), SignInActivity.class);
                 startActivity(intent);
             }
         });

@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -72,6 +73,8 @@ public class AddUserActivity extends AppCompatActivity {
                     DatabaseReference contridbRef = FirebaseDatabase.getInstance().getReference().child("contributor");
                     Contributer user = new Contributer(getIntent().getStringExtra("pID"),searchAdapter.getItem(i));
                     contridbRef.push().setValue(user);
+                    String name = ProFeedActivity.requiryUserMap.get(user.getuId()).getuName();
+                    Toast.makeText(AddUserActivity.this,name +" added to your project",Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });
