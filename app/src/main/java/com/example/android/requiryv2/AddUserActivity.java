@@ -38,7 +38,6 @@ public class AddUserActivity extends AppCompatActivity {
         actionBar.setCustomView(v);
         searchET = (EditText) findViewById(R.id.actionbar_edit_text);
         userList = new ArrayList<>(ProFeedActivity.requiryUserMap.keySet());
-        Log.e("Add user Act",userList.get(0)+" "+userList.get(1));
         handleIntent();
     }
     private void handleIntent() {

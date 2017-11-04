@@ -45,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         requiryUser = ProFeedActivity.requiryUserMap.get(uId);
         SharedPreferences sp = getSharedPreferences("User", MODE_PRIVATE);
-        if(!sp.getString("uID","").equals(requiryUser)){
+        if(!sp.getString("uID","").equals(requiryUser.getuID())){
             deleteProfile.setVisibility(View.INVISIBLE);
         }
         uProfilePic.setText(""+requiryUser.getuName().charAt(0));
