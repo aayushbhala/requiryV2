@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,17 +21,17 @@ import com.google.firebase.database.ValueEventListener;
 public class ProjectActivity extends AppCompatActivity {
 
     String pId, uId, pCreatorId;
-    TextView pNameTV, pCreatorTV, pDomainTV, pStartDateTV, pEndDateTV, pDescriptionTV, pLinkTV;
+    TextView pCreatorTV, pDomainTV, pStartDateTV, pEndDateTV, pDescriptionTV, pLinkTV;
     Button pApplyButton, pDiscussionButton, pContributorsButton;
 
     DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
+    Project project;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project);
 
-        pNameTV = (TextView) findViewById(R.id.pName_textView);
         pCreatorTV = (TextView) findViewById(R.id.pCreator_textView);
         pDomainTV = (TextView) findViewById(R.id.pDomain_textView);
         pStartDateTV = (TextView) findViewById(R.id.pStarted_textView);
@@ -44,10 +45,11 @@ public class ProjectActivity extends AppCompatActivity {
         fab.setVisibility(View.INVISIBLE);
 
         Intent i = getIntent();
-        Project project = (Project) i.getSerializableExtra("project_data");
+        project = (Project) i.getSerializableExtra("project_data");
+
+        setTitle(project.getpName());
 
         pId = project.getpID();
-        pNameTV.setText(project.getpName());
         pCreatorId = project.getuID();
         String creator = "";
         if(ProFeedActivity.requiryUserMap.containsKey(project.getuID()))
@@ -120,8 +122,8 @@ public class ProjectActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), DiscussionsActivity.class);
-                //intent.putExtras(dataFromProfeed);
-                //startActivity(intent);
+                intent.putExtra("project_data", project);
+                startActivity(intent);
             }
         });
 

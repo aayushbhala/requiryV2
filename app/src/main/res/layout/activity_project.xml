@@ -23,29 +23,6 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/pName_Layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:id="@+id/pName_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Name:"
-                    android:textSize="17sp"
-                    android:textColor="#5b5b5b"/>
-                <TextView
-                    android:id="@+id/pName_textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-
-
-
-            <LinearLayout
                 android:id="@+id/pCreator_Layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

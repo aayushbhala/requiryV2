@@ -5,7 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.text.LoginFilter;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -150,5 +154,29 @@ public class ProFeedActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater mi = getMenuInflater();
+        mi.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.logout_item){
+            SharedPreferences sp = getSharedPreferences("User", MODE_PRIVATE);
+            sp.edit().clear().apply();
+            Intent intent = new Intent(getBaseContext(), SignInActivity.class);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.profile_item){
+            Intent intent = new Intent(getBaseContext(), ProfileActivity.class);
+            SharedPreferences sp = getSharedPreferences("User", MODE_PRIVATE);
+            intent.putExtra("uID", sp.getString("uID", ""));
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

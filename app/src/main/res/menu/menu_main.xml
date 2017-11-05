@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.android.requiryv2.ProFeedActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="Logout"
+        android:id="@+id/logout_item"/>
+    <item
+        android:title="Profile"
+        android:id="@+id/profile_item"/>
 </menu>

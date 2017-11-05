@@ -26,6 +26,7 @@ public class ProFeedAdapter extends ArrayAdapter<Project> {
     private FirebaseDatabase mRequiryUserDatabse;
     private DatabaseReference mReqiryDatabaseReference;
     public static HashMap<String,Project> hashMap = new HashMap<>();
+
     public ProFeedAdapter(Context context, ArrayList<Project> arrayList) {
         super(context,0,arrayList);
     }
