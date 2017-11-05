@@ -16,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -135,12 +136,15 @@ public class ProFeedActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(ProFeedActivity.this,ProjectActivity.class);
+                Intent intent = new Intent(ProFeedActivity.this, ProjectActivity.class);
                 Project project = (Project) adapterView.getAdapter().getItem(i);
                 intent.putExtra("project_data", (Serializable) project);
                 startActivity(intent);
             }
         });
+        SharedPreferences sp = getSharedPreferences("User",MODE_PRIVATE);
+        String username = sp.getString("uUsername","");
+        FirebaseMessaging.getInstance().subscribeToTopic("user_" + username);
 
     }
     @Override

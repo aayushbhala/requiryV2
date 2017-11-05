@@ -47,9 +47,11 @@ public class ContributorsActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Contributer contributer = dataSnapshot.getValue(Contributer.class);
-                mAdapter.add(contributer);
-                Log.e("Contributor 12", contributer.getpId() + " " + contributer.getuId());
-                mAdapter.notifyDataSetChanged();
+                if(getIntent().getStringExtra("pID").equals(contributer.getpId())) {
+                    mAdapter.add(contributer);
+                    Log.e("Contributor 12", contributer.getpId() + " " + contributer.getuId());
+                    mAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -75,8 +77,8 @@ public class ContributorsActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(ContributorsActivity.this,ProfileActivity.class);
-                intent.putExtra("uID",mAdapter.getItem(i).getuId());
+                Intent intent = new Intent(ContributorsActivity.this, ProfileActivity.class);
+                intent.putExtra("uID", mAdapter.getItem(i).getuId());
                 startActivity(intent);
             }
         });

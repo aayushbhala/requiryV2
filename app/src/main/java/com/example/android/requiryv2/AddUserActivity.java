@@ -1,5 +1,6 @@
 package com.example.android.requiryv2;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +39,6 @@ public class AddUserActivity extends AppCompatActivity {
         actionBar.setCustomView(v);
         searchET = (EditText) findViewById(R.id.actionbar_edit_text);
         userList = new ArrayList<>(ProFeedActivity.requiryUserMap.keySet());
-        Log.e("Add user Act",userList.get(0)+" "+userList.get(1));
         handleIntent();
     }
     private void handleIntent() {
@@ -71,14 +71,30 @@ public class AddUserActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     DatabaseReference contridbRef = FirebaseDatabase.getInstance().getReference().child("contributor");
-                    Contributer user = new Contributer(getIntent().getStringExtra("pID"),searchAdapter.getItem(i));
+                    Contributer user = new Contributer(getIntent().getStringExtra("pID"), searchAdapter.getItem(i));
                     contridbRef.push().setValue(user);
                     String name = ProFeedActivity.requiryUserMap.get(user.getuId()).getuName();
-                    Toast.makeText(AddUserActivity.this,name +" added to your project",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddUserActivity.this, name + " added to your project", Toast.LENGTH_SHORT).show();
+                    SharedPreferences sp = getSharedPreferences("User", MODE_PRIVATE);
+                    String sender_name = ProFeedActivity.requiryUserMap.get(sp.getString("uID", "")).getuName();
+                    String message =  "You have been added by " +sender_name;
+                    AddMemberRequestNotif notification = new AddMemberRequestNotif(ProFeedActivity.requiryUserMap.get(user.getuId()).getuUsername(),message);
+                    DatabaseReference notif = FirebaseDatabase.getInstance().getReference().child("addMemberRequests");
+                    notif.push().setValue(notification);
+                  //  sendNotificationToUser(ProFeedActivity.requiryUserMap.get(user.getuId()).getuUsername(), "You have been added by " +sender_name);
                     finish();
                 }
             });
 
 
     }
+    public static void sendNotificationToUser(String user, String message) {
+        //Firebase ref = new Firebase("https://requiry-9f0c0.firebaseio.com/");
+        //final Firebase notifications = ref.child("addMemberRequests");
+        Log.e("Add User Activity", "At least I am here");
+        AddMemberRequestNotif notification = new AddMemberRequestNotif(user,message);
+        DatabaseReference notif = FirebaseDatabase.getInstance().getReference().child("addMemberRequests");
+        notif.push().setValue(notification);
+    }
+
 }

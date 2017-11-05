@@ -38,8 +38,6 @@ public class ContributorAdapter extends ArrayAdapter<Contributer> {
                     usernameTV.setText(requiryUser.getuName());
                 }
             }
-        }else {
-            listItemView.setVisibility(View.INVISIBLE);
         }
 
         return listItemView;
