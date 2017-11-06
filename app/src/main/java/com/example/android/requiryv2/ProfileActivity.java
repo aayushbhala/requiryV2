@@ -2,6 +2,7 @@ package com.example.android.requiryv2;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -29,6 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         uProfilePic = (TextView) findViewById(R.id.user_profile_photo);
         uName = (TextView) findViewById(R.id.user_profile_name);
@@ -56,6 +58,25 @@ public class ProfileActivity extends AppCompatActivity {
         uNumber.setText(requiryUser.getuNumber());
         uUserName.setText(requiryUser.getuUsername());
 
+        uNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:"+requiryUser.getuNumber()));
+                startActivity(intent);
+
+            }
+        });
+        uEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(android.content.Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{requiryUser.getuEmail()});
+                startActivity(i);
+            }
+        });
+
         deleteProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,5 +98,11 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }

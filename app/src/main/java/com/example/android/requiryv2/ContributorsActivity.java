@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,6 +39,8 @@ public class ContributorsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contributors);
 
         listView = (ListView) findViewById(R.id.contributor_list_view);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.empty_view_contributors);
+        listView.setEmptyView(linearLayout);
         ArrayList<Contributer> arrayList = new ArrayList<>();
         mAdapter = new ContributorAdapter(this,arrayList,getIntent().getStringExtra("pID"));
         listView.setAdapter(mAdapter);

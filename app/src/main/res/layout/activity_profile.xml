@@ -114,7 +114,7 @@
                     android:textColor="#000"/>
                 <TextView
                     android:id="@+id/user_profile_email"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#fff"
                     tools:text="issac@gmail.com"/>
@@ -133,7 +133,7 @@
                     android:textColor="#000"/>
                 <TextView
                     android:id="@+id/user_profile_number"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#fff"
                     tools:text="9988776655"/>

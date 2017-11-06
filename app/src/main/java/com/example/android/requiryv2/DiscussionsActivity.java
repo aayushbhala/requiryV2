@@ -1,12 +1,13 @@
 package com.example.android.requiryv2;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -19,7 +20,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class DiscussionsActivity extends Activity {
+public class DiscussionsActivity extends AppCompatActivity {
 
     ListView lv;
     EditText acceptMessage;
@@ -35,10 +36,11 @@ public class DiscussionsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discussions);
-
-        lv = findViewById(R.id.discussions_listview);
-        acceptMessage = findViewById(R.id.message_accept);
-        send = findViewById(R.id.send_button);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.empty_view_discussion);
+        lv = (ListView) findViewById(R.id.discussions_listview);
+        lv.setEmptyView(linearLayout);
+        acceptMessage = (EditText) findViewById(R.id.message_accept);
+        send = (Button) findViewById(R.id.send_button);
 
         Intent intent = getIntent();
         p = (Project) intent.getSerializableExtra("project_data");
