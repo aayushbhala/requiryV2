@@ -7,11 +7,20 @@ import java.io.Serializable;
  */
 public class Applications implements Serializable{
     private String pId;
-    private String uId;
+    private String applicantId;
+    private String creatorId;
+    private String applicationMsg;
+    private String pName;
 
-    public Applications(String pId, String uId) {
+    public Applications() {
+    }
+
+    public Applications(String pId, String applicantId, String creatorId, String applicationMsg, String pName) {
         this.pId = pId;
-        this.uId = uId;
+        this.applicantId = applicantId;
+        this.creatorId = creatorId;
+        this.applicationMsg = applicationMsg;
+        this.pName = pName;
     }
 
     public String getpId() {
@@ -22,11 +31,35 @@ public class Applications implements Serializable{
         this.pId = pId;
     }
 
-    public String getuId() {
-        return uId;
+    public String getApplicantId() {
+        return applicantId;
     }
 
-    public void setuId(String uId) {
-        this.uId = uId;
+    public void setApplicantId(String applicantId) {
+        this.applicantId = applicantId;
+    }
+
+    public String getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    public String getApplicationMsg() {
+        return applicationMsg;
+    }
+
+    public void setApplicationMsg(String applicationMsg) {
+        this.applicationMsg = applicationMsg;
+    }
+
+    public String getpName() {
+        return pName;
+    }
+
+    public void setpName(String pName) {
+        this.pName = pName;
     }
 }

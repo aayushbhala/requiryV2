@@ -51,7 +51,7 @@ public class ProFeedAdapter extends ArrayAdapter<Project> {
         mDomainTextView = (TextView) profeedListItemView.findViewById(R.id.domain);
 
         mProjectNameTextView.setText(projectData.getpName());
-        mCircularTextView.setText(""+projectData.getpName().charAt(0));
+        mCircularTextView.setText(""+Character.toUpperCase(projectData.getpName().charAt(0)));
         mCreatedByTextView.setText(projectData.getuID()+"");
         String creator = "";
         if(ProFeedActivity.requiryUserMap.containsKey(projectData.getuID()))
