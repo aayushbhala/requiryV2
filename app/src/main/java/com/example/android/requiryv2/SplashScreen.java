@@ -3,10 +3,7 @@ package com.example.android.requiryv2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -21,13 +18,6 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        ActionBar actionBar = getSupportActionBar();
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View v = inflater.inflate(R.layout.action_bar, null);
-        TextView actionbar_title = (TextView)v.findViewById(R.id.action_bar_title);
-        assert actionBar != null;
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setCustomView(v);
         msplashTextView = (TextView) findViewById(R.id.splash_tv);
         imageView = (ImageView) findViewById(R.id.imgLogo);
         Animation anim = AnimationUtils.loadAnimation(this,R.anim.mytransition);

@@ -14,7 +14,7 @@
         <item name="windowNoTitle">true</item>
     </style>
     
-    <style name="splash_screen" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+    <style name="splash_screen" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
