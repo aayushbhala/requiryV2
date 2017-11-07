@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -96,6 +97,7 @@ public class CreateProject extends AppCompatActivity {
         DatabaseReference newRef = mProjectDatbaseRef.push();
         Project project = new Project(newRef.getKey(), uId,name,domain,dateStarts,etc,desc,links);
         newRef.setValue(project);
+        FirebaseMessaging.getInstance().subscribeToTopic("user_" + uId);
         finish();
     }
 }

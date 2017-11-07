@@ -16,7 +16,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 public class ProjectActivity extends AppCompatActivity {
 
@@ -113,8 +112,6 @@ public class ProjectActivity extends AppCompatActivity {
                     mDatabaseReference.child("applications").push().setValue(a);
                     Toast.makeText(getBaseContext(), "Application Sent", Toast.LENGTH_SHORT).show();
                     pApplyButton.setClickable(false);
-
-                    FirebaseMessaging.getInstance().subscribeToTopic("user_" + project.getuID());
                 }
             });
         }
